@@ -3,52 +3,53 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
-interface NewFormProps {
-  onNextStep: () => void;
-  onPrevStep: () => void;
-}
-
-const NewForm3: React.FC<NewFormProps> = ({ onNextStep, onPrevStep }) => {
+const LoginForm: React.FC = ({}) => {
   const navigate = useNavigate();
+
+  const handleLoginCLick = () => {
+    navigate('/editlist') // navigate to edit list after login
+  }
+
+  const handleRegisterClick = () => {
+    navigate('/home'); // Use the navigate function to navigate to '/home'
+  };
+
   const formik = useFormik({
     initialValues: {
-      userName: '',
+      email: '',
       password: '',
     },
     validationSchema: Yup.object({
-      userName: Yup.string().required('Input valid username'),
+      email: Yup.string().required('Input valid email'),
       password: Yup.string().required('Input valid password'),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      navigate('/login');
     },
   });
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className='flex flex-col justify-center items-center m-60 bg-gray-800 p-4'
-    >
-      <label htmlFor='userName' className="block mb-2 text-white">
-        Username :
+    <form onSubmit={formik.handleSubmit} className='flex flex-col justify-center items-center m-60 bg-gray-800 p-4 rounded-md'>
+      <h1 className='mb-5 text-white'>Login Page</h1>
+      <label htmlFor='email' className='text-white'>
+        Email:
       </label>
       <input
         className='border border-black p-2 w-full mb-4 bg-gray-700 text-white'
         id='usernameID'
-        name='userName'
-        type='text'
+        name='email'
+        type='email'
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values.userName}
+        value={formik.values.email}
       />
 
-      {formik.touched.userName && formik.errors.userName ? (
-        <div className='text-red-500'>{formik.errors.userName}</div>
+      {formik.touched.email && formik.errors.email ? (
+        <div className='text-red-500'>{formik.errors.email}</div>
       ) : null}
-
-      <label htmlFor='password' className="block mb-2 text-white">
-        Password :
+      <h1> </h1>
+      <label htmlFor='password' className='text-white'>
+        Password:
       </label>
       <input
         className='border border-black p-2 w-full mb-4 bg-gray-700 text-white'
@@ -65,21 +66,21 @@ const NewForm3: React.FC<NewFormProps> = ({ onNextStep, onPrevStep }) => {
       ) : null}
 
       <button
-        type='submit'
-        className='border border-black p-2 mt-5 bg-gray-700 text-white rounded'
-      >
-        Submit
+      onClick={handleLoginCLick}
+       type='submit' className='border border-black p-2 mt-5 bg-gray-700 text-white rounded'>
+        Login
       </button>
-
+      <span className='text-white'> or </span>
       <button
         type='button'
-        onClick={onPrevStep}
+        onClick={handleRegisterClick}
         className='border border-black p-2 mt-5 bg-gray-700 text-white rounded'
       >
-        Previous
+        Register
       </button>
+      <span className='text-white' >Forgot Your Password </span>
     </form>
   );
 };
 
-export default NewForm3;
+export default LoginForm;
