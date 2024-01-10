@@ -1,4 +1,4 @@
-import TableList from "../../Components/TableList.tsx";
+import TableList from "../../Components/TableList"
 
 const TableForm = () => {
 

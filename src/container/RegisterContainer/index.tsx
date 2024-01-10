@@ -1,10 +1,11 @@
+import RegisterForm from "../../Components/RegisterForm"
 
 const RegisterContainer = () => {
 
     return (
         <div>
 
-           <h1> ini Register</h1> 
+        <RegisterForm />
 
         </div>
     )

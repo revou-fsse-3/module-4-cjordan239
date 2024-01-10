@@ -25,6 +25,11 @@ const NavBar = () => {
               Login
             </button>
           </li>
+          <li>
+            <button className="text-white hover:text-gray-300" onClick={() => navigate('/register')}>
+              Register
+            </button>
+          </li>
           
         </ul>
       </div>
